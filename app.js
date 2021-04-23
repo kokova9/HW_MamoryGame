@@ -38,44 +38,7 @@ const cardArray = [{
 },{
     name: "tavish",
     image: "images/tavish.png"
-},{
-    name: "blaclrock",
-    image: "images/blackrock.png"
-},{
-    name: "blaclrock",
-    image: "images/blackrock.png"
-},{
-    name: "burn",
-    image: "images/burn.png"
-},{
-    name: "burn",
-    image: "images/burn.png"
-},{
-    name: "castor",
-    image: "images/castor.png"
-},{
-    name: "castor",
-    image: "images/castor.png"
-},{
-    name: "demon",
-    image: "images/demon.png"
-},{
-    name: "demon",
-    image: "images/demon.png"
-},{
-    name: "pollux",
-    image: "images/pollux.png"
-},{
-    name: "pollux",
-    image: "images/pollux.png"
-},{
-    name: "scorpius",
-    image: "images/scorpius.png"
-},{
-    name: "scorpius",
-    image: "images/scorpius.png"
-}
-];
+}];
 
 
 
@@ -87,7 +50,7 @@ function createGameBoard() {
 
     
 
-    for (let index = 0; index < 24; index++) {
+    for (let index = 0; index < 12; index++) {
         let item = document.createElement('div');
         item.className = 'item';
         let card = document.createElement('img');
@@ -112,15 +75,14 @@ let cardChoosenID = [];
 let score = 0;
 
 function flipcard() {
-    let cardID = parseInt(this.getAttribute('id'));
+    let cardID = this.getAttribute('id');
     this.setAttribute('src',cardArray[cardID].image);
     cardChoosen.push(cardArray[cardID]);
-    cardChoosenID.push(cardID+1);
+    cardChoosenID.push(cardID);
     if(cardChoosen.length === 2) {
         document.getElementById('gameConsole').textContent = 'Checking....';
         setTimeout(checkForMatch,500);
     }
-    console.log(cardChoosenID[0],cardChoosenID[1]);
 }
 
 function checkForMatch() {
@@ -130,12 +92,10 @@ function checkForMatch() {
     let selectedCardTwo = cardChoosenID[1];
 
     let consoleMessage = "";
-    
-    if(cardChoosen[0].name === cardChoosen[1].name && cardChoosenID[0] !== cardChoosenID[1]) {
+
+    if(cardChoosen[0].name === cardChoosen[1].name) {
         cards[selectedCardOne].setAttribute('src','images/white.png');
         cards[selectedCardTwo].setAttribute('src','images/white.png');
-        cards[selectedCardOne].removeEventListener('click',flipcard);
-        cards[selectedCardTwo].removeEventListener('click',flipcard);
         score = score+1;
         consoleMessage = 'You found a match!!'
     }else{
@@ -147,7 +107,7 @@ function checkForMatch() {
     document.getElementById('gameScore').textContent = score;
     document.getElementById('gameConsole').textContent = consoleMessage;
 
-    
+
     cardChoosen = [];
     cardChoosenID = [];
 
