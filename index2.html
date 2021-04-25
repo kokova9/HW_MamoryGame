@@ -21,7 +21,7 @@
         .grid {
             display: grid;
             /* justify-content: center; */
-            grid-template-columns: auto auto auto auto auto auto;
+            grid-template-columns: auto auto auto auto;
             width: 800px;
             width: 100%;
         }
@@ -34,7 +34,7 @@
         .logo {
             text-align: center;
         }
-        #game,#score,#gameConsole {
+        #game,#score,#gameConsole,#diff {
             font-family: Bodoni MT;
         }
         #game {
@@ -43,18 +43,47 @@
         #score,#gameConsole {
             font-size: 40px;
         }
+        .item {
+            display: grid;
+            justify-content: space-around;
+            grid-template-columns: auto auto;
+        }
+        .title {
+            text-align: center;
+            margin-top: 35px;
+            align-items: center;
+            display: grid;
+            grid-template-rows: 100px 70px 70px 100px;
+            border: 8px solid #9B9B9B;
+            /* background-color: goldenrod; */
+            color: #000000;
+            text-shadow: 2px 2px 5px #CD7672;
+            -webkit-text-stroke-width: 1px black;
+            width: 100%;
+            height: 360px;
+        }
+        #diff {
+            color: lime;
+            font-size: 50px;
+        }
+        #gameScore {
+            color: white;
+        }
     </style>
 </head>
 <body>
     <div class="bg">
         <div class="logo"><img src="images/logo.png" alt="" width="800" height="400" id="logo"></div>
+    <div class="item">
     <div class="title">
         <h1 id="game">Memory Game</h1>
         <h4 id="score">Score: <span id='gameScore'>0</span></h4>
         <h4 id='gameConsole'>Game start!!</h4>
+        <h4 id="diff">Good (0 Click)</h4>
     </div>
     <div id="gameBoard">
 
+    </div>
     </div>
     </div>
 </body>

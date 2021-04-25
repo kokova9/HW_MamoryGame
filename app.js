@@ -106,7 +106,7 @@ function createGameBoard() {
     cardArray.sort(() =>  0.5 - Math.random());
 }
 
-
+let clickCount = 0;
 let cardChoosen = [];
 let cardChoosenID = [];
 let score = 0;
@@ -116,12 +116,25 @@ function flipcard() {
     this.setAttribute('src',cardArray[cardID].image);
     cardChoosen.push(cardArray[cardID]);
     cardChoosenID.push(cardID+1);
+    clickCount = clickCount+1;
+    if (clickCount <= 35) {
+        document.getElementById('diff').textContent = 'Good ('+clickCount+' Click)';
+    }else if (clickCount >= 36 && clickCount <= 45) {
+        document.getElementById('diff').style.color = 'aqua';
+        document.getElementById('diff').textContent = 'Normal ('+clickCount+' Click)';
+    }else {
+        document.getElementById('diff').style.color = 'red';
+        document.getElementById('diff').textContent = 'Bad ('+clickCount+' Click)';
+    }
     if(cardChoosen.length === 2) {
+        document.getElementById('gameConsole').style.color = 'black';
         document.getElementById('gameConsole').textContent = 'Checking....';
         setTimeout(checkForMatch,500);
     }
     console.log(cardChoosenID[0],cardChoosenID[1]);
 }
+
+
 
 function checkForMatch() {
     const cards = document.querySelectorAll('img');
@@ -137,15 +150,18 @@ function checkForMatch() {
         cards[selectedCardOne].removeEventListener('click',flipcard);
         cards[selectedCardTwo].removeEventListener('click',flipcard);
         score = score+1;
+        document.getElementById('gameConsole').style.color = 'lime';
         consoleMessage = 'You found a match!!'
     }else{
         cards[selectedCardOne].setAttribute('src','images/card_back.png');
         cards[selectedCardTwo].setAttribute('src','images/card_back.png');
+        document.getElementById('gameConsole').style.color = 'red';
         consoleMessage = 'Sorry, try again...'
     }
 
     document.getElementById('gameScore').textContent = score;
     document.getElementById('gameConsole').textContent = consoleMessage;
+
 
     
     cardChoosen = [];
